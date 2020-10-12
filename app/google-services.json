@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "532679422667",
+    "firebase_url": "https://modern-bazaar-2c06e.firebaseio.com",
+    "project_id": "modern-bazaar-2c06e",
+    "storage_bucket": "modern-bazaar-2c06e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532679422667:android:e414cac08a0a8fb281614e",
+        "android_client_info": {
+          "package_name": "com.dotfiftythree.modernbazaar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "532679422667-jla0hvb97qb7fnks6sh12ku2e3c18igb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq8Fm4o-FPhEsJkBe2wJsI09F70iP1svs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "532679422667-jla0hvb97qb7fnks6sh12ku2e3c18igb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

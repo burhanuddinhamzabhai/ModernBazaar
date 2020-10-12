@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical|end">
+
+            <TextView
+                android:id="@+id/profilename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="40dp"
+                android:text="Hello \nMariya"
+                android:textColor="#fff"
+                android:textSize="56sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="-150dp"
+            android:src="@drawable/female" />
+
+        <LinearLayout
+            android:layout_width="157dp"
+            android:layout_height="43dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="-50dp"
+            android:background="@drawable/new_request_bg"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/newrequesttxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/newrequest"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/newrequestdot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-20dp"
+                android:text="@string/newrequestdot"
+                android:textColor="@color/green"
+                android:textSize="46sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:paddingBottom="76dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:layout_width="140dp"
+                            android:layout_height="125dp"
+                            android:background="@drawable/insert_bg"
+                            android:orientation="vertical"
+                            android:padding="12dp"
+                            android:id="@+id/insertproductlin">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:alpha=".56"
+                                app:srcCompat="@drawable/ic_baseline_shopping_cart_24" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_weight="1"
+                                android:gravity="bottom"
+                                android:text="@string/insertitem"
+                                android:textColor="#fff"
+                                android:textSize="26dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent" />
+
+                        <LinearLayout
+                            android:layout_width="140dp"
+                            android:layout_height="125dp"
+                            android:background="@drawable/complain_bg"
+                            android:orientation="vertical"
+                            android:padding="12dp"
+                            android:id="@+id/filecomplainlin">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:alpha=".56"
+                                app:srcCompat="@drawable/ic_baseline_add_alert_24" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_weight="1"
+                                android:gravity="bottom"
+                                android:text="@string/filecomplain"
+                                android:textColor="#fff"
+                                android:textSize="26dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:layout_width="140dp"
+                            android:layout_height="125dp"
+                            android:background="@drawable/recent_barter_bg"
+                            android:orientation="vertical"
+                            android:padding="12dp"
+                            android:id="@+id/recentbarterlin">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:alpha=".56"
+                                app:srcCompat="@drawable/ic_baseline_thumb_up_24" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_weight="1"
+                                android:gravity="bottom"
+                                android:text="@string/recentbarter"
+                                android:textColor="#fff"
+                                android:textSize="26dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent" />
+
+                        <LinearLayout
+                            android:layout_width="140dp"
+                            android:layout_height="125dp"
+                            android:background="@drawable/saved_item_bg"
+                            android:orientation="vertical"
+                            android:padding="12dp"
+                            android:id="@+id/saveditemlin">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:alpha=".56"
+                                app:srcCompat="@drawable/ic_baseline_bookmark_24" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_weight="1"
+                                android:gravity="bottom"
+                                android:text="@string/saveditems"
+                                android:textColor="#fff"
+                                android:textSize="26dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:layout_width="140dp"
+                            android:layout_height="125dp"
+                            android:background="@drawable/deactivate_account_bg"
+                            android:orientation="vertical"
+                            android:padding="12dp"
+                            android:id="@+id/deactivatelin">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:alpha=".56"
+                                app:srcCompat="@drawable/ic_baseline_remove_circle_24" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_weight="1"
+                                android:gravity="bottom"
+                                android:text="@string/deactivateaccount"
+                                android:textColor="#fff"
+                                android:textSize="24dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent" />
+
+                        <LinearLayout
+                            android:layout_width="140dp"
+                            android:layout_height="125dp"
+                            android:background="@drawable/logout_bg"
+                            android:orientation="vertical"
+                            android:padding="12dp"
+                            android:id="@+id/logoutlin">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:alpha=".56"
+                                app:srcCompat="@drawable/ic_baseline_exit_to_app_24" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_weight="1"
+                                android:gravity="bottom"
+                                android:text="@string/logout"
+                                android:textColor="#fff"
+                                android:textSize="26dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

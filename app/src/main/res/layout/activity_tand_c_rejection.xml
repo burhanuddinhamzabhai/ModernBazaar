@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TandCRejection"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/rejectionofterms"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/inconviniencetxt"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:layout_marginLeft="31dp"
+                android:layout_marginStart="31dp"
+                android:layout_marginEnd="31dp"
+                android:layout_marginRight="31dp"
+                android:justificationMode="inter_word"/>
+        </LinearLayout>
+    </ScrollView>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:gravity="bottom|center_horizontal"
+    android:layout_marginTop="27dp">
+    <Button
+        android:id="@+id/backtotc"
+        android:layout_width="335dp"
+        android:layout_height="50dp"
+        android:background="@drawable/primary_btn_bg"
+        android:text="@string/backtotc"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="18sp"
+/>
+
+    <Button
+        android:id="@+id/exitbtn"
+        android:layout_width="335dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="21dp"
+        android:background="@drawable/red_baground"
+        android:text="@string/exit"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+</LinearLayout>
+</LinearLayout>
