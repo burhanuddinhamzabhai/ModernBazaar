@@ -156,36 +156,56 @@ public class InsertProduct extends AppCompatActivity implements AdapterView.OnIt
     }
 
     private void mbspCalculate() {
-        if(!TextUtils.isEmpty(productMrp.getText())&&(!TextUtils.isEmpty(purchaseYear.getText())||!TextUtils.isEmpty(purchaseMonth.getText()))&&(damageYes.isChecked()||damageNo.isChecked())){
-           if(damageYes.isChecked()&&!TextUtils.isEmpty(purchaseYear.getText())&&TextUtils.isEmpty(purchaseMonth.getText())){
-               productmbspvalue=String.valueOf(((((((Integer.parseInt(productMrp.getText().toString()))*50)/100)/(Integer.parseInt((purchaseYear.getText().toString()))*12))*10)*50)/100);
-                productmbsp.setText(productmbspvalue+" Rs");
-           }else if(damageYes.isChecked()&&TextUtils.isEmpty(purchaseYear.getText())&&!TextUtils.isEmpty(purchaseMonth.getText())){
-               productmbspvalue=String.valueOf(((((((Integer.parseInt(productMrp.getText().toString()))*50)/100)/(Integer.parseInt(purchaseMonth.getText().toString())))*10)*50)/100);
-               productmbsp.setText(productmbspvalue+" Rs");
-           }else if(damageYes.isChecked()&&!TextUtils.isEmpty(purchaseYear.getText())&&!TextUtils.isEmpty(purchaseMonth.getText())){
-               productmbspvalue=String.valueOf(((((((Integer.parseInt(productMrp.getText().toString()))*50)/100)/(((Integer.parseInt(purchaseYear.getText().toString()))*12)+(Integer.parseInt(purchaseMonth.getText().toString()))))*10)*50)/100);
-               productmbsp.setText(productmbspvalue+" Rs");
-           }else if(damageNo.isChecked()&&!TextUtils.isEmpty(purchaseYear.getText())&&TextUtils.isEmpty(purchaseMonth.getText())){
-               productmbspvalue=String.valueOf((((((Integer.parseInt(productMrp.getText().toString())))/(Integer.parseInt((purchaseYear.getText().toString()))*12))*10)*50)/100);
-               productmbsp.setText(productmbspvalue+" Rs");
-           }else if(damageNo.isChecked()&&TextUtils.isEmpty(purchaseYear.getText())&&!TextUtils.isEmpty(purchaseMonth.getText())){
-               productmbspvalue=String.valueOf(((((Integer.parseInt(productMrp.getText().toString()))/(Integer.parseInt(purchaseMonth.getText().toString())))*10)*50)/100);
-               productmbsp.setText(productmbspvalue+" Rs");
-           }else if(damageNo.isChecked()&&!TextUtils.isEmpty(purchaseYear.getText())&&!TextUtils.isEmpty(purchaseMonth.getText())){
-               productmbspvalue=String.valueOf((((((Integer.parseInt(productMrp.getText().toString()))/(((Integer.parseInt(purchaseYear.getText().toString()))*12)+(Integer.parseInt(purchaseMonth.getText().toString()))))*10)*50)/100));
-               productmbsp.setText(productmbspvalue+" Rs");
-           }
-
-        }else if (TextUtils.isEmpty(productMrp.getText())){
+        if (!TextUtils.isEmpty(productMrp.getText()) && (!TextUtils.isEmpty(purchaseYear.getText()) || !TextUtils.isEmpty(purchaseMonth.getText())) && (damageYes.isChecked() || damageNo.isChecked())) {
+            if (TextUtils.isEmpty(purchaseYear.getText()) && ((Integer.parseInt(purchaseMonth.getText().toString())) <= 5)) {
+                if (damageYes.isChecked()) {
+                    int minus = Integer.parseInt(purchaseMonth.getText().toString());
+//                    Log.i("m1", "mbspCalculate: " + minus);
+                    for (int i = 0; i < (productMrp.length() / 2); i++) {
+                        minus = minus * 10;
+//                        Log.i("m2", "mbspCalculate: " + minus);
+                    }
+//                    Log.i("m2", "mbspCalculate: " + minus);
+                    productmbspvalue = String.valueOf((((Integer.parseInt(productMrp.getText().toString())) * 70) / 100) - minus);
+                    productmbsp.setText(productmbspvalue + " Rs");
+                } else if (damageNo.isChecked()) {
+                    int minus = Integer.parseInt(purchaseMonth.getText().toString());
+//                    Log.i("m1", "mbspCalculate: " + minus);
+                    for (int i = 0; i < (productMrp.length() / 2); i++) {
+                        minus = minus * 10;
+                    }
+//                    Log.i("m2", "mbspCalculate: " + minus);
+                    productmbspvalue = String.valueOf((Integer.parseInt(productMrp.getText().toString())) - minus);
+                    productmbsp.setText(productmbspvalue + " Rs");
+                }
+            } else if (damageYes.isChecked() && !TextUtils.isEmpty(purchaseYear.getText()) && TextUtils.isEmpty(purchaseMonth.getText())) {
+                productmbspvalue = String.valueOf(((((((Integer.parseInt(productMrp.getText().toString())) * 50) / 100) / (Integer.parseInt((purchaseYear.getText().toString())) * 12)) * 10) * 50) / 100);
+                productmbsp.setText(productmbspvalue + " Rs");
+            } else if (damageYes.isChecked() && TextUtils.isEmpty(purchaseYear.getText()) && !TextUtils.isEmpty(purchaseMonth.getText())) {
+                productmbspvalue = String.valueOf(((((((Integer.parseInt(productMrp.getText().toString())) * 50) / 100) / (Integer.parseInt(purchaseMonth.getText().toString()))) * 10) * 50) / 100);
+                productmbsp.setText(productmbspvalue + " Rs");
+            } else if (damageYes.isChecked() && !TextUtils.isEmpty(purchaseYear.getText()) && !TextUtils.isEmpty(purchaseMonth.getText())) {
+                productmbspvalue = String.valueOf(((((((Integer.parseInt(productMrp.getText().toString())) * 50) / 100) / (((Integer.parseInt(purchaseYear.getText().toString())) * 12) + (Integer.parseInt(purchaseMonth.getText().toString())))) * 10) * 50) / 100);
+                productmbsp.setText(productmbspvalue + " Rs");
+            } else if (damageNo.isChecked() && !TextUtils.isEmpty(purchaseYear.getText()) && TextUtils.isEmpty(purchaseMonth.getText())) {
+                productmbspvalue = String.valueOf((((((Integer.parseInt(productMrp.getText().toString()))) / (Integer.parseInt((purchaseYear.getText().toString())) * 12)) * 10) * 50) / 100);
+                productmbsp.setText(productmbspvalue + " Rs");
+            } else if (damageNo.isChecked() && TextUtils.isEmpty(purchaseYear.getText()) && !TextUtils.isEmpty(purchaseMonth.getText())) {
+                productmbspvalue = String.valueOf(((((Integer.parseInt(productMrp.getText().toString())) / (Integer.parseInt(purchaseMonth.getText().toString()))) * 10) * 50) / 100);
+                productmbsp.setText(productmbspvalue + " Rs");
+            } else if (damageNo.isChecked() && !TextUtils.isEmpty(purchaseYear.getText()) && !TextUtils.isEmpty(purchaseMonth.getText())) {
+                productmbspvalue = String.valueOf((((((Integer.parseInt(productMrp.getText().toString())) / (((Integer.parseInt(purchaseYear.getText().toString())) * 12) + (Integer.parseInt(purchaseMonth.getText().toString())))) * 10) * 50) / 100));
+                productmbsp.setText(productmbspvalue + " Rs");
+            }
+        } else if (TextUtils.isEmpty(productMrp.getText())) {
             Snackbar snackbar = Snackbar.make(base, getResources().getString(R.string.entermrp), Snackbar.LENGTH_SHORT);
             snackbar.getView().setBackgroundColor(ContextCompat.getColor(InsertProduct.this, R.color.error));
             snackbar.show();
-        }else if (TextUtils.isEmpty(purchaseYear.getText())&&TextUtils.isEmpty(purchaseMonth.getText())){
+        } else if (TextUtils.isEmpty(purchaseYear.getText()) && TextUtils.isEmpty(purchaseMonth.getText())) {
             Snackbar snackbar = Snackbar.make(base, getResources().getString(R.string.enterpurchaseperiod), Snackbar.LENGTH_SHORT);
             snackbar.getView().setBackgroundColor(ContextCompat.getColor(InsertProduct.this, R.color.error));
             snackbar.show();
-        }else if (!damageYes.isChecked()&&!damageNo.isChecked()){
+        } else if (!damageYes.isChecked() && !damageNo.isChecked()) {
             Snackbar snackbar = Snackbar.make(base, getResources().getString(R.string.damagecheck), Snackbar.LENGTH_SHORT);
             snackbar.getView().setBackgroundColor(ContextCompat.getColor(InsertProduct.this, R.color.error));
             snackbar.show();
