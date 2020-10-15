@@ -37,7 +37,7 @@ public class InsertProduct extends AppCompatActivity implements AdapterView.OnIt
     private RadioGroup damage,shareContactGrp,shipping;
     private RadioButton damageYes,damageNo,shareYes,shareNo,shipYes,shipNo;
     private ScrollView productDetails;
-    private Button calculatembsp;
+    private Button calculatembsp,upload,cancel;
     private CheckBox shareemail,sharephone;
     String productImageUri, productcategory,productverification,productmbspvalue;
     private Spinner categoryspin,verificationspin;
@@ -74,6 +74,8 @@ public class InsertProduct extends AppCompatActivity implements AdapterView.OnIt
         calculatembsp=findViewById(R.id.calculatembspupload);
         categoryspin=findViewById(R.id.catergorylistupload);
         verificationspin=findViewById(R.id.verificationlistupload);
+        upload=findViewById(R.id.uploadproductbtn);
+        cancel=findViewById(R.id.cancelproductuploadbtn);
 
         //Getting the instance of Spinner and applying OnItemSelectedListener on it
         Spinner categoryspin = (Spinner) findViewById(R.id.catergorylistupload);
@@ -151,6 +153,18 @@ public class InsertProduct extends AppCompatActivity implements AdapterView.OnIt
             @Override
             public void onClick(View v) {
                 mbspCalculate();
+            }
+        });
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadProduct();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -240,5 +254,8 @@ public class InsertProduct extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
+    }
+    private void uploadProduct(){
+
     }
 }
