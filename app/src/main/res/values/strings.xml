@@ -81,7 +81,9 @@
     <string name="enterpurchaseperiod">Please Enter Period of Purchase</string>
     <string name="damagecheck">Please State whether the product is damage or not</string>
     <string name="inrs">Enter in RS</string>
-
+    <string name="areyousure">Are You Sure?</string>
+    <string name="iamsure">Yes I am Sure!</string>
+    <string name="deactivatedes">We are sorry to hear you go, once you deactivate your account you will lose all of your data and will not be able to recover it!</string>
 
 
 </resources>
