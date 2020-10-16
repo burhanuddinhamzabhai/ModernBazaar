@@ -8,6 +8,7 @@
     <string name="pass">Password</string>
     <string name="login">Login</string>
     <string name="visitor">Continue as a Visitor</string>
+    <string name="invalidcredentials">You have entered Invalid Credentials, Please try again!</string>
     <string name="signup_des">Join new world of Exchanging Products</string>
     <string name="enter_email">Enter your Email Id</string>
     <string name="set_pass">Set a Password</string>
@@ -34,7 +35,7 @@
     <string name="tandc">Terms and Conditions</string>
     <string name="accept">Accept and Continue</string>
     <string name="reject">Reject</string>
-    <string name="tnc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</string>
+    <string name="tnc">1. MBSP can be modified by product verifier at the time of product verification.\n2. In detection of any fraud, legal action can be taken against you.\n3. If any user will file a complain against you and if the complain proved to be legit than your personal details such as address and phone number will be directly shared.\n4. In case of inactivity on the platform of at most 15 days, your account will be deactivated to maintain consistency on the platform.</string>
     <string name="inconvinience">Sorry for your Inconvenience</string>
     <string name="inconviniencetxt">our user"'s experience matters the most to us, and we can achieve that by the means of terms and conditions that you need to agree on, this helps us to create an amazing exchange environment with trust on both sides.</string>
     <string name="backtotc">Back to Terms and Conditions</string>
@@ -81,8 +82,12 @@
     <string name="enterpurchaseperiod">Please Enter Period of Purchase</string>
     <string name="damagecheck">Please State whether the product is damage or not</string>
     <string name="inrs">Enter in RS</string>
-    <string name="areyousure">Are You Sure?</string>
+    <string name="areyousure">Are you sure?</string>
     <string name="iamsure">Yes I am Sure!</string>
+    <string name="fillallfield">Please Fill All Fields</string>
+    <string name="productuploadfailed">Product Upload Failed! Please Try Again</string>
+    <string name="productuploaded">Product Uploaded Successfully</string>
+    <string name="deactivationsuccessful">Your Account Has Been Deactivated Successfully!</string>
     <string name="deactivatedes">We are sorry to hear you go, once you deactivate your account you will lose all of your data and will not be able to recover it!</string>
 
 

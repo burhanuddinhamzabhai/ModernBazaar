@@ -109,8 +109,9 @@
                         android:layout_height="40dp"
                         android:layout_weight="1"
                         android:background="@drawable/gray_background"
+                        android:imeOptions="actionNext"
                         android:padding="8dp"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -136,8 +137,9 @@
                         android:layout_weight="1"
                         android:background="@drawable/gray_background"
                         android:gravity="start"
+                        android:imeOptions="actionNext"
                         android:padding="8dp"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -186,10 +188,11 @@
                         android:layout_height="40dp"
                         android:layout_weight="1"
                         android:background="@drawable/gray_background"
-                        android:inputType="number"
                         android:hint="@string/inrs"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
                         android:padding="8dp"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -219,9 +222,10 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:background="@drawable/gray_background"
+                            android:imeOptions="actionNext"
                             android:inputType="number"
                             android:padding="8dp"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -238,9 +242,10 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:background="@drawable/gray_background"
+                            android:imeOptions="actionNext"
                             android:inputType="number"
                             android:padding="8dp"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -317,8 +322,9 @@
                         android:layout_weight="1"
                         android:background="@drawable/gray_background"
                         android:gravity="start"
+                        android:imeOptions="actionNext"
                         android:padding="8dp"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -374,11 +380,11 @@
                             android:layout_marginEnd="6dp"
                             android:layout_weight="12"
                             android:background="@drawable/gray_background"
-                            android:textColorHint="#000"
                             android:enabled="false"
                             android:inputType="number"
                             android:padding="8dp"
-                            android:textSize="14sp"/>
+                            android:textColorHint="#000"
+                            android:textSize="14sp" />
 
                         <Button
                             android:id="@+id/calculatembspupload"

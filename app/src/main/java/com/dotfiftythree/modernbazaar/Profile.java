@@ -20,12 +20,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class profile extends Fragment {
+public class Profile extends Fragment {
 
 
     private LinearLayout insert,logout,deactivate,base;
     FirebaseAuth mAuth;
-    public profile() {
+    public Profile() {
         // Required empty public constructor
     }
 
@@ -66,17 +66,8 @@ public class profile extends Fragment {
         deactivate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                user.delete()
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-
-                                }
-                            }
-                        });
+                Intent transition = new Intent(getActivity(), DeactivateAccount.class);
+                startActivity(transition);
             }
         });
         // Inflate the layout for this fragment

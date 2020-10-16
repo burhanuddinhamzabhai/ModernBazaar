@@ -76,7 +76,7 @@ public class TermsandCondition extends AppCompatActivity {
                             user.put("VERIFICATION",userData.getString(User.getVerified(),null));
                             user.put(User.getTerms(),"Accepted");
                             user.put(User.getUserid(), FirebaseAuth.getInstance().getCurrentUser().getUid());
-                            user.put("JOININGDATE",dateToStr);
+                            user.put("JOINING DATE",dateToStr);
                             userDB.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(user)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

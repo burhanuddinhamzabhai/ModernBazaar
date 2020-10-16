@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
                             } else {
                                 progressDialog.cancel();
-                                Snackbar snackbar = Snackbar.make(base,task.getException().toString(), Snackbar.LENGTH_SHORT);
+                                Snackbar snackbar = Snackbar.make(base,R.string.invalidcredentials, Snackbar.LENGTH_SHORT);
                                 snackbar.getView().setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.error));
                                 snackbar.show();
                             }

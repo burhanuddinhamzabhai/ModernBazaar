@@ -78,7 +78,8 @@
                     android:inputType="textPassword"
                     android:textColorHint="@color/gray"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:imeOptions="actionGo"/>
 
                 <Button
                     android:id="@+id/continueBtn"

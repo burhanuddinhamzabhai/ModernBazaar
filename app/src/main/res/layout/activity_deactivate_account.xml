@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DeactivateAccount"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/base">
     <LinearLayout
-        android:id="@+id/back"
+        android:id="@+id/backfromda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
@@ -31,16 +32,55 @@
 
     </LinearLayout>
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="220dp"
-        android:src="@drawable/deleteaccount"/>
+        android:src="@drawable/deleteaccount"
+        android:layout_gravity="center"/>
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:text="@string/areyousure"/>
+        android:text="@string/areyousure"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="34sp"/>
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:text="@string/deactivatedes"/>
+        android:text="@string/deactivatedes"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="36dp"
+        android:textSize="20sp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:gravity="center|bottom">
+    <Button
+        android:layout_width="335dp"
+        android:layout_height="54dp"
+        android:text="@string/backtoprofile"
+        android:textAllCaps="false"
+        android:background="@drawable/primary_btn_bg"
+        android:textColor="#fff"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:id="@+id/canceldecactivatebtn"/>
+    <Button
+        android:layout_width="335dp"
+        android:layout_height="54dp"
+        android:text="@string/iamsure"
+        android:textAllCaps="false"
+        android:background="@drawable/red_baground"
+        android:textColor="#fff"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:id="@+id/confirmdecactivatebtn"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="20dp"/>
 
+</LinearLayout>
 </LinearLayout>
