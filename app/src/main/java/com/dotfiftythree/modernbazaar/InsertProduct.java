@@ -48,8 +48,7 @@ public class InsertProduct extends AppCompatActivity implements AdapterView.OnIt
 
     public static final int GALLERY_REQUEST_CODE = 123;
     String[] categorylist = {"Laptop", "Computer", "Printer", "Scanner", "Mobile", "Tablet", "Camera",
-            "Tv", "Fridge", "Wall AC", "Tower AC", "Cooler", "Biker", "Car", "SUV", "Oven", "Sport Car", "Sport Bike",
-            "Ricksaw", "Furniture"};
+            "Tv", "Fridge", "Wall AC", "Tower AC", "Cooler", "Oven", "Furniture"};
     String[] verificationlist = {"Request", "Unverified"};
     private LinearLayout back, selectImage, damagereportlin, sharelin, base;
     private ImageView productImage;
@@ -108,9 +107,9 @@ public class InsertProduct extends AppCompatActivity implements AdapterView.OnIt
         cancel = findViewById(R.id.cancelproductuploadbtn);
 
         //Getting the instance of Spinner and applying OnItemSelectedListener on it
-        Spinner categoryspin = (Spinner) findViewById(R.id.catergorylistupload);
+        Spinner categoryspin = findViewById(R.id.catergorylistupload);
         categoryspin.setOnItemSelectedListener(this);
-        Spinner verificationspin = (Spinner) findViewById(R.id.verificationlistupload);
+        Spinner verificationspin = findViewById(R.id.verificationlistupload);
         verificationspin.setOnItemSelectedListener(this);
 
         //Creating the ArrayAdapter instance having the country list

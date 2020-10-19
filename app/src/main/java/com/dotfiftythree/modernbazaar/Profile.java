@@ -1,34 +1,44 @@
 package com.dotfiftythree.modernbazaar;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+
+import java.util.HashMap;
 
 
 public class Profile extends Fragment {
 
 
-    private LinearLayout insert,logout,deactivate,base;
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     FirebaseAuth mAuth;
+    DatabaseReference userDetails = firebaseDatabase.getReference("userDB");
+    ChildEventListener userDetailsListener;
+    String userName, userGender;
+    private LinearLayout insert, logout, deactivate, base;
+    private ImageView userImage;
+    private TextView profileName;
+
     public Profile() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -41,12 +51,14 @@ public class Profile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
-        insert= v.<LinearLayout>findViewById(R.id.insertproductlin);
-        logout= v.<LinearLayout>findViewById(R.id.logoutlin);
-        deactivate=v.<LinearLayout>findViewById(R.id.deactivatelin);
-        base=v.<LinearLayout>findViewById(R.id.base);
+        insert = v.findViewById(R.id.insertproductlin);
+        logout = v.findViewById(R.id.logoutlin);
+        deactivate = v.findViewById(R.id.deactivatelin);
+        base = v.findViewById(R.id.base);
+        userImage = v.findViewById(R.id.userImage);
+        profileName = v.findViewById(R.id.profilename);
 
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +82,51 @@ public class Profile extends Fragment {
                 startActivity(transition);
             }
         });
+
+        userDetailsListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String name, gender;
+                GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {
+                };
+                final String _childKey = snapshot.getKey();
+                final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
+                if (_childKey.equals(mAuth.getCurrentUser().getUid())) {
+                    name = _childValue.get(User.getName()).toString();
+                    gender = _childValue.get(User.getGender()).toString();
+                    userName = name;
+                    userGender = gender;
+                    if (userGender.equals("male")) {
+                        userImage.setImageResource(R.drawable.male);
+                    }
+                    profileName.setText("Hello\n" + userName);
+
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        userDetails.addChildEventListener(userDetailsListener);
+
+
         // Inflate the layout for this fragment
         return v;
     }

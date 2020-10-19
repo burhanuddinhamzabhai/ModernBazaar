@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DeactivateAccount"></activity>
+        <activity android:name=".VisitorViewProductDetail"></activity>
+        <activity android:name=".DeactivateAccount" />
         <activity android:name=".InsertProduct" />
         <activity android:name=".Visitor" />
         <activity android:name=".HomePage" />

@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="52dp"
         android:background="@color/colorPrimary"
         android:gravity="center">
 
@@ -101,15 +101,14 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <ProgressBar
-            android:id="@+id/setmbsp"
+        <SeekBar
+            android:id="@+id/setmbspvisitor"
             android:layout_width="match_parent"
-            android:layout_height="6dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginLeft="28dp"
             android:layout_marginEnd="28dp"
-            android:layout_marginRight="28dp"
-            android:background="@drawable/primary_btn_bg" />
+            android:layout_marginRight="28dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -125,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="0 RS"
+                android:id="@+id/visitorminmbsp"
                 android:textSize="16dp" />
 
             <TextView
@@ -132,28 +132,34 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="0 RS"
+                android:id="@+id/visitorcurrentmbsp"
                 android:textSize="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0 RS"
+                android:id="@+id/visitormaxmbsp"
                 android:textSize="16dp" />
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:layout_weight="1"
-        android:background="@drawable/itembg"
-        android:gravity="center"
-        android:padding="22dp">
+        android:layout_height="match_parent"
+        android:background="@drawable/itembg">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/itemslist"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_marginTop="22dp"
+            android:gravity="center"
+            android:padding="22dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/visitorproductlist"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
