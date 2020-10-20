@@ -89,6 +89,13 @@
     <string name="productuploaded">Product Uploaded Successfully</string>
     <string name="deactivationsuccessful">Your Account Has Been Deactivated Successfully!</string>
     <string name="deactivatedes">We are sorry to hear you go, once you deactivate your account you will lose all of your data and will not be able to recover it!</string>
-
+    <string name="reqbarter">Request Barter</string>
+    <string name="call">Call</string>
+    <string name="email">Email</string>
+    <string name="pidcopy">Product ID Copied!</string>
+    <string name="sidcopy">Seller ID Copied!</string>
+    <string name="addtosave">Product Added to Saved Items!</string>
+    <string name="removefromsave">Product Removed from Saved Items!</string>
+    <string name="copysellerid">Copy SellerID </string>
 
 </resources>

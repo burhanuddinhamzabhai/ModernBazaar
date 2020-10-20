@@ -17,26 +17,26 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class FetchProductAdapter extends RecyclerView.Adapter<FetchProductAdapter.ViewHolder> {
+public class HomeFetchProductAdapter extends RecyclerView.Adapter<HomeFetchProductAdapter.ViewHolder> {
     RecyclerView recyclerView;
     ArrayList<FetchProductArrayList> products = new ArrayList<>();
     private Context context;
 
-    public FetchProductAdapter(Context context, ArrayList<FetchProductArrayList> products) {
+    public HomeFetchProductAdapter(Context context, ArrayList<FetchProductArrayList> products) {
         this.context = context;
         this.products = products;
     }
 
     @NonNull
     @Override
-    public FetchProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HomeFetchProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // create view for recycleview item
-        View view = LayoutInflater.from(context).inflate(R.layout.visitor_item_view, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.home_item_view, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FetchProductAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HomeFetchProductAdapter.ViewHolder holder, int position) {
         // initialize each element
         final FetchProductArrayList fetchProductArrayList = products.get(position);
         holder.setProductImage(fetchProductArrayList.getProductImage());
@@ -59,15 +59,15 @@ public class FetchProductAdapter extends RecyclerView.Adapter<FetchProductAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            productImage = itemView.findViewById(R.id.visitorproductphoto);
-            productName = itemView.findViewById(R.id.visitorproductname);
-            productDes = itemView.findViewById(R.id.visitorproductdes);
-            periodOfUsage = itemView.findViewById(R.id.visitorproductperiod);
-            detailViewBtn = itemView.findViewById(R.id.visitorproductindetail);
+            productImage = itemView.findViewById(R.id.homeproductphoto);
+            productName = itemView.findViewById(R.id.homeproductname);
+            productDes = itemView.findViewById(R.id.homeproductdes);
+            periodOfUsage = itemView.findViewById(R.id.homeproductperiod);
+            detailViewBtn = itemView.findViewById(R.id.homeproductindetail);
             detailViewBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent transition = new Intent(context, VisitorViewProductDetail.class);
+                    Intent transition = new Intent(context, HomeViewInDetail.class);
                     transition.putExtra(Product.getProductid(), mUrl);
                     context.startActivity(transition);
                 }
