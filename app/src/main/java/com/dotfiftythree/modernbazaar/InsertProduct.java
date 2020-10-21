@@ -341,11 +341,11 @@ public class InsertProduct extends AppCompatActivity implements AdapterView.OnIt
 
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
+
     }
 
     private void uploadProduct() {
-        //tODO: CONDITION FOR DAMAGE REPORT AND EMAIL AND PHONE
+
         if (imagedata != null && !TextUtils.isEmpty(productName.getText().toString()) && !TextUtils.isEmpty(productDes.getText().toString()) && !TextUtils.isEmpty(productmbsp.getText().toString()) && (shipYes.isChecked() || shipNo.isChecked()) && (shareYes.isChecked() || shareNo.isChecked()) ) {
             progressDialog = new ProgressDialog(InsertProduct.this);
             progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);

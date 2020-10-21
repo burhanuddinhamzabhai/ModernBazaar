@@ -25,10 +25,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 
@@ -36,13 +35,18 @@ public class home extends Fragment {
 
     SeekBar mbsppb;
     ChildEventListener maxminmbsp, productfetch, changefetch;
-    DatabaseReference productsfetch = FirebaseDatabase.getInstance().getReference().child("ProductsDB");
+    FirebaseDatabase products = FirebaseDatabase.getInstance();
+    DatabaseReference productsfetch = products.getReference("ProductsDB");
     ArrayList<FetchProductArrayList> fetchProductArrayLists = new ArrayList<>();
     HomeFetchProductAdapter fetchProductAdapter;
     RecyclerView recyclerView;
     ProgressDialog progressDialog;
     private LinearLayout mbspdes, base;
-    private TextView mbspinfo, minmbsp, maxmbsp, currentmbsp;
+    ArrayList<Integer> mbspvalues = new ArrayList<>();
+    int min, max;
+    private TextView minmbsp;
+    private TextView maxmbsp;
+    private TextView currentmbsp;
 
     public home() {
         // Required empty public constructor
@@ -59,7 +63,7 @@ public class home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-        mbspinfo = v.findViewById(R.id.homembspinfo);
+        TextView mbspinfo = v.findViewById(R.id.homembspinfo);
         mbspdes = v.findViewById(R.id.homembspdetail);
         base = v.findViewById(R.id.base);
         mbsppb = v.findViewById(R.id.setmbsphome);
@@ -89,48 +93,62 @@ public class home extends Fragment {
         maxminmbsp = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                int value;
+                GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {
+                };
+                final String _childKey = snapshot.getKey();
+                final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
+                value = Integer.parseInt((_childValue.get(Product.getMbsp()).toString()).replace(" Rs", ""));
+                mbspvalues.add(value);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    mbsppb.setMin(Collections.min(mbspvalues));
+                    min = Collections.min(mbspvalues);
+                }
 
+                mbsppb.setMax(Collections.max(mbspvalues));
+                max = Collections.max(mbspvalues);
+                Log.i("minmax", "min" + Collections.min(mbspvalues) + "max" + Collections.max(mbspvalues));
 
-                Query maxvalue = productsfetch.orderByChild(Product.getMbsp()).limitToFirst(1);
-                maxvalue.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                            String max = childSnapshot.child(Product.getMbsp()).getValue().toString();
-
-                            int maxv = Integer.parseInt(max.replace(" Rs", ""));
-                            mbsppb.setMax(maxv);
-                            maxmbsp.setText(max);
-                            Query minvalue = productsfetch.orderByChild(Product.getMbsp()).limitToLast(1);
-                            minvalue.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                                        String min = childSnapshot.child(Product.getMbsp()).getValue().toString();
-
-                                        int minv = Integer.parseInt(min.replace(" Rs", ""));
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                            mbsppb.setMin(minv);
-                                        }
-                                        minmbsp.setText(min);
-
-
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                    throw databaseError.toException(); // don't swallow errors
-                                }
-                            });
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        throw databaseError.toException(); // don't swallow errors
-                    }
-                });
+//                Query maxvalue = productsfetch.orderByChild(Product.getMbsp());
+//                maxvalue.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+//                            String max = childSnapshot.child(Product.getMbsp()).getValue().toString();
+//                            Toast.makeText(getActivity(),max,Toast.LENGTH_SHORT).show();
+//                            int maxv = Integer.parseInt(max.replace(" Rs", ""));
+//                            mbsppb.setMax(maxv);
+//                            maxmbsp.setText(max);
+//                            Query minvalue = productsfetch.orderByChild(Product.getMbsp()).limitToLast(1);
+//                            minvalue.addValueEventListener(new ValueEventListener() {
+//                                @Override
+//                                public void onDataChange(DataSnapshot dataSnapshot) {
+//                                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+//                                        String min = childSnapshot.child(Product.getMbsp()).getValue().toString();
+//
+//                                        int minv = Integer.parseInt(min.replace(" Rs", ""));
+//                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                                            mbsppb.setMin(minv);
+//                                        }
+//                                        minmbsp.setText(min);
+//
+//
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onCancelled(DatabaseError databaseError) {
+//                                    throw databaseError.toException(); // don't swallow errors
+//                                }
+//                            });
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//                        throw databaseError.toException(); // don't swallow errors
+//                    }
+//                });
             }
 
             @Override
@@ -154,7 +172,6 @@ public class home extends Fragment {
             }
         };
         productsfetch.addChildEventListener(maxminmbsp);
-
         //fetching products
         productfetch = new ChildEventListener() {
             @Override
@@ -180,6 +197,9 @@ public class home extends Fragment {
                 fetchProductArrayLists.add(new FetchProductArrayList(productImage, productName, periodOfUsage, productDes, productID));
                 fetchProductAdapter.notifyDataSetChanged();
                 progressDialog.cancel();
+                minmbsp.setText(min + " Rs");
+                maxmbsp.setText(max + " Rs");
+
             }
 
             @Override

@@ -57,18 +57,19 @@ public class ProductListDialog extends AppCompatDialogFragment {
         userItemFetchListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                String productName, productID;
+                String productName, productID, productImage;
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {
                 };
                 final String _childKey = snapshot.getKey();
                 final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
                 if (_childKey.contains(mAuth.getCurrentUser().getUid())) {
-
+                    productImage = _childValue.get(Product.getImage()).toString();
+                    Log.i("image", productImage);
                     productName = _childValue.get(Product.getName()).toString();
                     productID = _childValue.get(Product.getProductid()).toString();
                     Log.i("TAG", "onChildAdded: " + productName);
-                    barterProductLists.add(new BarterProductList(productName, productID));
+                    barterProductLists.add(new BarterProductList(productName, productID, HomeViewInDetail.productID, HomeViewInDetail.sellerID, productImage, HomeViewInDetail.sellerImage));
                     barterProductListAdapter.notifyDataSetChanged();
                 }
             }

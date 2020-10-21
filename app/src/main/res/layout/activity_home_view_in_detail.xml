@@ -260,22 +260,28 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/homewholelayout"
             android:layout_marginTop="10dp"
             android:gravity="center"
+            android:layout_height="54dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/homeViewInDetailcallBtn"
                 android:layout_width="0dp"
                 android:layout_height="54dp"
-                android:layout_marginEnd="20dp"
                 android:layout_weight="1"
                 android:background="@drawable/blue_bg"
                 android:text="@string/call"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/homemid"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
 
             <Button
                 android:id="@+id/homeViewInDetailemailBtn"

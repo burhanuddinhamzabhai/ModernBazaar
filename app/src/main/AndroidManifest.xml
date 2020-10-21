@@ -3,6 +3,7 @@
     package="com.dotfiftythree.modernbazaar">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeViewInDetail"></activity>
+        <activity android:name=".BarterRequestDetail"></activity>
+        <activity android:name=".NewBarterRequest" />
+        <activity android:name=".HomeViewInDetail" />
         <activity android:name=".VisitorViewProductDetail" />
         <activity android:name=".DeactivateAccount" />
         <activity android:name=".InsertProduct" />

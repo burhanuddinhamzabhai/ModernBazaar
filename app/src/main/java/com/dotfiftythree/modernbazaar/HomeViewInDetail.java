@@ -43,12 +43,17 @@ public class HomeViewInDetail extends AppCompatActivity implements ProductListDi
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference("ProductsDB");
     DatabaseReference userReference = firebaseDatabase.getReference("userDB");
-    ChildEventListener productDetails, userListener, checksaved, userItemFetchListener;
-    String productID, userDataKey, sellerID, phone, mail;
+    static String productID;
+    static String sellerID, sellerImage;
+    DatabaseReference barterCheck = firebaseDatabase.getReference("BarterDB");
+    ChildEventListener productDetails, userListener, checksaved, barterCheckListener;
+    String userDataKey;
+    String phone;
+    String mail;
     ImageView productImage, copyProductID, save, copySellerID;
     TextView productName, productDes, productMBSP, periodOfUsage, productCategory, productMrp, productDamageReport,
             productDamageDes, productVerification, productVerificationDes, productShip;
-    LinearLayout back, base;
+    LinearLayout back, base, homemid, wholehome;
     ProgressDialog progressDialog;
     Boolean phoneCheck = false, mailCheck = false;
     ArrayList<BarterProductList> barterProductLists = new ArrayList<>();
@@ -80,8 +85,8 @@ public class HomeViewInDetail extends AppCompatActivity implements ProductListDi
         makePhone = findViewById(R.id.homeViewInDetailcallBtn);
         makeEmail = findViewById(R.id.homeViewInDetailemailBtn);
         RequestBarter = findViewById(R.id.homeViewInDetailReqBarterBtn);
-
-
+        homemid = findViewById(R.id.homemid);
+        wholehome = findViewById(R.id.homewholelayout);
         productID = getIntent().getStringExtra(Product.getProductid());
 
 
@@ -107,15 +112,58 @@ public class HomeViewInDetail extends AppCompatActivity implements ProductListDi
                 snackbar.show();
             }
         });
-        productDetails = new ChildEventListener() {
+
+        barterCheckListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {
                 };
                 final String _childKey = snapshot.getKey();
                 final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
+                if ((_childValue.get(Barter.getSellerProduct()).toString()).equals(productID)) {
+                    if ((_childValue.get(Barter.getBuyer()).toString()).equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        RequestBarter.setBackground(getDrawable(R.drawable.dark_gray_bg));
+                        RequestBarter.setText("Barter Requested");
+                        RequestBarter.setEnabled(false);
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        barterCheck.addChildEventListener(barterCheckListener);
+
+
+        productDetails = new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String image;
+                GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {
+                };
+                final String _childKey = snapshot.getKey();
+                final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
                 if ((_childValue.get(Product.getProductid()).toString()).equals(productID)) {
-                    StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(_childValue.get(Product.getImage()).toString());
+                    image = _childValue.get(Product.getImage()).toString();
+                    sellerImage = image;
+                    StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(sellerImage);
                     GlideApp.with(HomeViewInDetail.this)
                             .load(ref)
                             .into(productImage);
@@ -150,27 +198,23 @@ public class HomeViewInDetail extends AppCompatActivity implements ProductListDi
                         phoneCheck = true;
                         phone = _childValue.get(Product.getPhone()).toString();
                         makePhone.setVisibility(View.VISIBLE);
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.MATCH_PARENT
-                        );
-                        params.setMargins(0, 0, 0, 0);
-                        makePhone.setLayoutParams(params);
+
                     } else {
                         makePhone.setVisibility(View.GONE);
+                        homemid.setVisibility(View.GONE);
                     }
                     if (snapshot.child(Product.getEmail()).exists()) {
                         mailCheck = true;
                         mail = _childValue.get(Product.getEmail()).toString();
                         makeEmail.setVisibility(View.VISIBLE);
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.MATCH_PARENT
-                        );
-                        params.setMargins(0, 0, 0, 0);
-                        makeEmail.setLayoutParams(params);
                     } else {
                         makeEmail.setVisibility(View.GONE);
+                        homemid.setVisibility(View.GONE);
+                    }
+                    if (!snapshot.child(Product.getPhone()).exists() && !snapshot.child(Product.getEmail()).exists()) {
+                        wholehome.setVisibility(View.GONE);
+                    } else {
+                        wholehome.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -242,8 +286,6 @@ public class HomeViewInDetail extends AppCompatActivity implements ProductListDi
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent transition = new Intent(HomeViewInDetail.this, Profile.class);
-                startActivity(transition);
                 finish();
             }
         });

@@ -46,10 +46,11 @@
             android:layout_gravity="end"
             android:layout_marginTop="-50dp"
             android:background="@drawable/new_request_bg"
+            android:id="@+id/newrequest"
             android:gravity="center">
 
             <TextView
-                android:id="@+id/newrequesttxt"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/newrequest"

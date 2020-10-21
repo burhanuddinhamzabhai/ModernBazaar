@@ -97,5 +97,8 @@
     <string name="addtosave">Product Added to Saved Items!</string>
     <string name="removefromsave">Product Removed from Saved Items!</string>
     <string name="copysellerid">Copy SellerID </string>
+    <string name="reqsent">Barter Request Sent</string>
+    <string name="newReq">New Barter Request</string>
+    <string name="clicktoopen">Click to Open</string>
 
 </resources>
