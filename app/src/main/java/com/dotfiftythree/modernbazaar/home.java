@@ -29,6 +29,7 @@ import com.google.firebase.database.GenericTypeIndicator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Objects;
 
 
 public class home extends Fragment {
@@ -99,7 +100,7 @@ public class home extends Fragment {
                 final String _childKey = snapshot.getKey();
                 final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
                 if (!(snapshot.child(Product.getBarter()).exists())) {
-                    value = Integer.parseInt((_childValue.get(Product.getMbsp()).toString()).replace(" Rs", ""));
+                    value = Integer.parseInt((Objects.requireNonNull(_childValue.get(Product.getMbsp())).toString()).replace(" Rs", ""));
                     mbspvalues.add(value);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         mbsppb.setMin(Collections.min(mbspvalues));

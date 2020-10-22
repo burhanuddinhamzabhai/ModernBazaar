@@ -8,9 +8,13 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +37,38 @@ public class SavedItems extends AppCompatActivity {
     RecyclerView savedItemRecyclerView;
     LinearLayout back;
     String savedProducts;
+    HashMap<String, Object> map = new HashMap<>();
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            final int position = viewHolder.getAdapterPosition();
+            final String newSavedString, modifiedString = savedProducts, old;
+            old = savedItemsLists.get(position).productID + ", ";
+            newSavedString = modifiedString.replace(savedItemsLists.get(position).productID + ", ", "");
+            Log.i("TAG", "onSwiped: " + newSavedString);
+            Log.i("TAG", "onSwiped: " + savedProducts);
+            Log.i("TAG", "onSwiped: " + modifiedString);
+
+            map = new HashMap<>();
+            map.put(User.getSavedItems(), newSavedString);
+            userDatabase.child(mAuth.getCurrentUser().getUid()).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    map.clear();
+                    savedItemsLists.remove(position);
+                    savedItemsAdapter.notifyItemRemoved(position);
+                    final Snackbar snackbar = Snackbar.make(savedItemRecyclerView, R.string.itemreoved, Snackbar.LENGTH_SHORT);
+                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(SavedItems.this, R.color.error));
+                    snackbar.show();
+                }
+            });
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,5 +171,10 @@ public class SavedItems extends AppCompatActivity {
         savedItemsAdapter = new SavedItemsAdapter(SavedItems.this, savedItemsLists);
         savedItemRecyclerView.setAdapter(savedItemsAdapter);
 
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(savedItemRecyclerView);
+
+
     }
 }
+
