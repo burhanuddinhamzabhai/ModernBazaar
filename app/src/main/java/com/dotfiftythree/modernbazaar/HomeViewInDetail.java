@@ -125,6 +125,13 @@ public class HomeViewInDetail extends AppCompatActivity implements ProductListDi
                         RequestBarter.setBackground(getDrawable(R.drawable.dark_gray_bg));
                         RequestBarter.setText("Barter Requested");
                         RequestBarter.setEnabled(false);
+                        if (snapshot.child(Barter.getBarterResponse()).exists()) {
+                            if ((_childValue.get(Barter.getBarterResponse()).toString()).equals("REJECTED")) {
+                                RequestBarter.setBackground(getDrawable(R.drawable.primary_btn_bg));
+                                RequestBarter.setText("Barter Rejected, Try Again?");
+                                RequestBarter.setEnabled(true);
+                            }
+                        }
                     }
                 }
             }

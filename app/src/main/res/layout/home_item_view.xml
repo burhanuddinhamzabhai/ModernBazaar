@@ -62,7 +62,7 @@
                 android:layout_marginTop="9dp"
                 android:alpha=".54"
                 android:gravity="center"
-                android:maxLines="2"
+                android:maxLines="1"
                 android:text="@string/main_description"
                 android:textColor="#fff"
                 android:textSize="20dp"

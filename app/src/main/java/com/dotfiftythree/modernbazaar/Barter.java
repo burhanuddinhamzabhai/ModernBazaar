@@ -12,6 +12,16 @@ public class Barter {
     public static final String buyerProductImg = "BUYER PRODUCT IMAGE";
     public static final String sellerProductImg = "SELLER PRODUCT IMAGE";
     private static final String BUYER_PRODUCT = "BUYER PRODUCT";
+    private static final String responseDate = "RESPONSE DATE";
+    private static final String barterResponse = "BARTER RESPONSE";
+
+    public static String getResponseDate() {
+        return responseDate;
+    }
+
+    public static String getBarterResponse() {
+        return barterResponse;
+    }
 
     public static String getBuyerProductImg() {
         return buyerProductImg;

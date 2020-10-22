@@ -98,17 +98,18 @@ public class home extends Fragment {
                 };
                 final String _childKey = snapshot.getKey();
                 final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
-                value = Integer.parseInt((_childValue.get(Product.getMbsp()).toString()).replace(" Rs", ""));
-                mbspvalues.add(value);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    mbsppb.setMin(Collections.min(mbspvalues));
-                    min = Collections.min(mbspvalues);
+                if (!(snapshot.child(Product.getBarter()).exists())) {
+                    value = Integer.parseInt((_childValue.get(Product.getMbsp()).toString()).replace(" Rs", ""));
+                    mbspvalues.add(value);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        mbsppb.setMin(Collections.min(mbspvalues));
+                        min = Collections.min(mbspvalues);
+                    }
+
+                    mbsppb.setMax(Collections.max(mbspvalues));
+                    max = Collections.max(mbspvalues);
+                    Log.i("minmax", "min" + Collections.min(mbspvalues) + "max" + Collections.max(mbspvalues));
                 }
-
-                mbsppb.setMax(Collections.max(mbspvalues));
-                max = Collections.max(mbspvalues);
-                Log.i("minmax", "min" + Collections.min(mbspvalues) + "max" + Collections.max(mbspvalues));
-
 //                Query maxvalue = productsfetch.orderByChild(Product.getMbsp());
 //                maxvalue.addValueEventListener(new ValueEventListener() {
 //                    @Override
@@ -181,25 +182,26 @@ public class home extends Fragment {
                 };
                 final String _childKey = snapshot.getKey();
                 final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
-                productName = _childValue.get(Product.getName()).toString();
-                productDes = _childValue.get(Product.getDescription()).toString();
-                if (_childValue.get(Product.getPurchaseYear()).equals("")) {
-                    periodOfUsage = _childValue.get(Product.getPurchaseMonth()).toString() + " Months";
-                } else if (_childValue.get(Product.getPurchaseMonth()).equals("")) {
-                    periodOfUsage = _childValue.get(Product.getPurchaseYear()).toString() + " Years";
-                } else {
-                    periodOfUsage = _childValue.get(Product.getPurchaseYear()).toString() + " Years " + _childValue.get(Product.getPurchaseMonth()).toString() + " Months";
+                if (!(snapshot.child(Product.getBarter()).exists())) {
+                    productName = _childValue.get(Product.getName()).toString();
+                    productDes = _childValue.get(Product.getDescription()).toString();
+                    if (_childValue.get(Product.getPurchaseYear()).equals("")) {
+                        periodOfUsage = _childValue.get(Product.getPurchaseMonth()).toString() + " Months";
+                    } else if (_childValue.get(Product.getPurchaseMonth()).equals("")) {
+                        periodOfUsage = _childValue.get(Product.getPurchaseYear()).toString() + " Years";
+                    } else {
+                        periodOfUsage = _childValue.get(Product.getPurchaseYear()).toString() + " Years " + _childValue.get(Product.getPurchaseMonth()).toString() + " Months";
+                    }
+                    productImage = _childValue.get(Product.getImage()).toString();
+                    Log.i("TAG", "onChildAdded: " + productImage);
+                    productID = _childValue.get(Product.getProductid()).toString();
+
+                    fetchProductArrayLists.add(new FetchProductArrayList(productImage, productName, periodOfUsage, productDes, productID));
+                    fetchProductAdapter.notifyDataSetChanged();
+                    progressDialog.cancel();
+                    minmbsp.setText(min + " Rs");
+                    maxmbsp.setText(max + " Rs");
                 }
-                productImage = _childValue.get(Product.getImage()).toString();
-                Log.i("TAG", "onChildAdded: " + productImage);
-                productID = _childValue.get(Product.getProductid()).toString();
-
-                fetchProductArrayLists.add(new FetchProductArrayList(productImage, productName, periodOfUsage, productDes, productID));
-                fetchProductAdapter.notifyDataSetChanged();
-                progressDialog.cancel();
-                minmbsp.setText(min + " Rs");
-                maxmbsp.setText(max + " Rs");
-
             }
 
             @Override
@@ -250,7 +252,7 @@ public class home extends Fragment {
                             final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
                             int value = Integer.parseInt((_childValue.get(Product.getMbsp()).toString()).replace(" Rs", ""));
                             Log.i("TAG2", "onChildAdded: " + value);
-                            if ((progress + 10) > value) {
+                            if ((progress + 10) > value && (!(snapshot.child(Product.getBarter())).exists())) {
                                 recyclerView.setVisibility(View.VISIBLE);
                                 productName = _childValue.get(Product.getName()).toString();
                                 productDes = _childValue.get(Product.getDescription()).toString();

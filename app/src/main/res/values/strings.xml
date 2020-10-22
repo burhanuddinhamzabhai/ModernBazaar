@@ -100,5 +100,9 @@
     <string name="reqsent">Barter Request Sent</string>
     <string name="newReq">New Barter Request</string>
     <string name="clicktoopen">Click to Open</string>
+    <string name="acceptbarter">Accept Barter</string>
+    <string name="rejectbarter">Reject Barter</string>
+    <string name="barteraccepted">Barter Accepted</string>
+    <string name="barterrejected">Barter Rejected</string>
 
 </resources>

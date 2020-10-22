@@ -180,7 +180,7 @@ public class BarterProductListAdapter extends RecyclerView.Adapter<BarterProduct
                     map.clear();
                     Toast.makeText(context, R.string.reqsent, Toast.LENGTH_SHORT).show();
                     Intent transition = new Intent(context, HomeViewInDetail.class);
-                    transition.putExtra(Product.getProductid(), productID);
+                    transition.putExtra(Product.getProductid(), HomeViewInDetail.productID);
                     context.startActivity(transition);
                     ((Activity) context).finish();
                 }
@@ -220,7 +220,7 @@ public class BarterProductListAdapter extends RecyclerView.Adapter<BarterProduct
                     progressDialog.cancel();
                     Toast.makeText(context, R.string.reqsent, Toast.LENGTH_SHORT).show();
                     Intent transition = new Intent(context, HomeViewInDetail.class);
-                    transition.putExtra(Product.getProductid(), productID);
+                    transition.putExtra(Product.getProductid(), HomeViewInDetail.productID);
                     context.startActivity(transition);
                     ((Activity) context).finish();
                 }
@@ -256,7 +256,7 @@ public class BarterProductListAdapter extends RecyclerView.Adapter<BarterProduct
                     map.clear();
                     Toast.makeText(context, R.string.reqsent, Toast.LENGTH_SHORT).show();
                     Intent transition = new Intent(context, HomeViewInDetail.class);
-                    transition.putExtra(Product.getProductid(), productID);
+                    transition.putExtra(Product.getProductid(), HomeViewInDetail.productID);
                     context.startActivity(transition);
                     ((Activity) context).finish();
                 }

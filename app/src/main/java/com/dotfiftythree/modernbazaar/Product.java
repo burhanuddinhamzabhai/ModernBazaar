@@ -10,16 +10,21 @@ public class Product {
     public static final String purchaseMonth="PURCHASE MONTH";
     public static final String damaged="IS DAMAGED";
     public static final String damageReport="DAMAGE REPORT";
-    public static final String date="UPLOAD DATE";
-    public static final String phone="MOBILE NUMBER";
-    public static final String userid="USERID";
-    public static final String image="PRODUCT IMAGE";
-    public static final String ship="READY TO SHIP";
-    public static final String shareContact="SHARE CONTACT";
-    public static final String verification="PRODUCT VERIFICATION";
-    public static final String verificationReport="VERIFICATION REPORT";
-    public static final String mbsp="PRODUCT MBSP";
-    public static final String productid="PRODUCTID";
+    public static final String date = "UPLOAD DATE";
+    public static final String phone = "MOBILE NUMBER";
+    public static final String userid = "USERID";
+    public static final String image = "PRODUCT IMAGE";
+    public static final String ship = "READY TO SHIP";
+    public static final String shareContact = "SHARE CONTACT";
+    public static final String verification = "PRODUCT VERIFICATION";
+    public static final String verificationReport = "VERIFICATION REPORT";
+    public static final String mbsp = "PRODUCT MBSP";
+    public static final String productid = "PRODUCTID";
+    public static final String barter = "BARTER";
+
+    public static String getBarter() {
+        return barter;
+    }
 
     public static String getEmail() {
         return email;

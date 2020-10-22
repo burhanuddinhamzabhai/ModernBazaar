@@ -48,7 +48,7 @@ public class NewBarterReqAdapter extends RecyclerView.Adapter<NewBarterReqAdapte
         holder.setBuyerProductID(fetchProductArrayList.getBuyerProduct());
         holder.setBuyerProduct(fetchProductArrayList.getBuyerProductImage());
         holder.setSellerProduct(fetchProductArrayList.getSellerProductImage());
-
+        holder.setBarterID(fetchProductArrayList.getBarterID());
     }
 
 
@@ -61,6 +61,7 @@ public class NewBarterReqAdapter extends RecyclerView.Adapter<NewBarterReqAdapte
         final ImageView sellerProductImg, buyerProductImg;
         String buyerProductURL, sellerProductURL, productID;
         LinearLayout newReqLin;
+        private String barterID;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,8 +72,9 @@ public class NewBarterReqAdapter extends RecyclerView.Adapter<NewBarterReqAdapte
             newReqLin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent transition = new Intent(context, VisitorViewProductDetail.class);
+                    Intent transition = new Intent(context, BarterRequestDetail.class);
                     transition.putExtra(Product.getProductid(), productID);
+                    transition.putExtra(Barter.getBarterID(), barterID);
                     context.startActivity(transition);
                     ((Activity) context).finish();
                 }
@@ -103,6 +105,12 @@ public class NewBarterReqAdapter extends RecyclerView.Adapter<NewBarterReqAdapte
             productID = buyerProduct;
         }
 
+        public String getBarterID() {
+            return barterID;
+        }
 
+        public void setBarterID(String barterID) {
+            this.barterID = barterID;
+        }
     }
 }
