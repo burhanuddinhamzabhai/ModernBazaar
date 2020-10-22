@@ -14,6 +14,11 @@ public class Barter {
     private static final String BUYER_PRODUCT = "BUYER PRODUCT";
     private static final String responseDate = "RESPONSE DATE";
     private static final String barterResponse = "BARTER RESPONSE";
+    private static final String requestSeen = "REQUEST SEEN";
+
+    public static String getRequestSeen() {
+        return requestSeen;
+    }
 
     public static String getResponseDate() {
         return responseDate;

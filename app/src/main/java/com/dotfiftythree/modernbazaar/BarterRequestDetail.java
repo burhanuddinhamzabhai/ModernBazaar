@@ -216,6 +216,19 @@ public class BarterRequestDetail extends AppCompatActivity {
                     } else {
                         wholehome.setVisibility(View.VISIBLE);
                     }
+                    if (snapshot.child(Barter.getBarterResponse()).exists()) {
+                        if ((_childValue.get(Barter.getBarterResponse()).toString()).equals("ACCEPTED")) {
+                            rejectBarter.setVisibility(View.GONE);
+                            acceptBarter.setText(R.string.barteraccepted);
+                            acceptBarter.setEnabled(false);
+                            barterdetail1mid.setVisibility(View.GONE);
+                        } else if ((_childValue.get(Barter.getBarterResponse()).toString()).equals("REJECTED")) {
+                            acceptBarter.setVisibility(View.GONE);
+                            rejectBarter.setText(R.string.barterrejected);
+                            rejectBarter.setEnabled(false);
+                            barterdetail1mid.setVisibility(View.GONE);
+                        }
+                    }
                 }
             }
 

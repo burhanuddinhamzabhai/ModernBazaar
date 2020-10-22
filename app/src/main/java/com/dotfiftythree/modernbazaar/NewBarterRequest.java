@@ -50,7 +50,7 @@ public class NewBarterRequest extends AppCompatActivity {
                 };
                 final String _childKey = snapshot.getKey();
                 final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
-                if (!snapshot.child(Barter.getOpen()).exists()) {
+                if (!(snapshot.child(Barter.getRequestSeen()).exists())) {
                     buyer = _childValue.get(Barter.getBuyer()).toString();
                     seller = _childValue.get(Barter.getSeller()).toString();
                     buyerProduct = _childValue.get(Barter.getBuyerProduct()).toString();

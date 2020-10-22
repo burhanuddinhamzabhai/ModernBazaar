@@ -104,5 +104,7 @@
     <string name="rejectbarter">Reject Barter</string>
     <string name="barteraccepted">Barter Accepted</string>
     <string name="barterrejected">Barter Rejected</string>
+    <string name="copybarterId">"Tap to Copy BarterID "</string>
+    <string name="barteridcopied">BarterID Copied</string>
 
 </resources>
