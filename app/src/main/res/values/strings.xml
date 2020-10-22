@@ -106,5 +106,6 @@
     <string name="barterrejected">Barter Rejected</string>
     <string name="copybarterId">"Tap to Copy BarterID "</string>
     <string name="barteridcopied">BarterID Copied</string>
+    <string name="saveditemstxt">Saved Items</string>
 
 </resources>

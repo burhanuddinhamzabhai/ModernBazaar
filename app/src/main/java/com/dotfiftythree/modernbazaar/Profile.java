@@ -32,7 +32,7 @@ public class Profile extends Fragment {
     DatabaseReference userDetails = firebaseDatabase.getReference("userDB");
     ChildEventListener userDetailsListener;
     String userName, userGender;
-    private LinearLayout insert, logout, deactivate, base, newReq, recentBarterLin;
+    private LinearLayout insert, logout, deactivate, base, newReq, recentBarterLin, savedItemLin;
     private ImageView userImage;
     private TextView profileName;
 
@@ -59,6 +59,8 @@ public class Profile extends Fragment {
         profileName = v.findViewById(R.id.profilename);
         newReq = v.findViewById(R.id.newrequest);
         recentBarterLin = v.findViewById(R.id.recentbarterlin);
+        savedItemLin = v.findViewById(R.id.saveditemlin);
+
 
         mAuth = FirebaseAuth.getInstance();
         insert.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +100,15 @@ public class Profile extends Fragment {
                 startActivity(transition);
             }
         });
+        savedItemLin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent transition = new Intent(getActivity(), SavedItems.class);
+                startActivity(transition);
+            }
+        });
+
+
         userDetailsListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

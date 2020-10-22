@@ -258,8 +258,8 @@ public class HomeViewInDetail extends AppCompatActivity implements ProductListDi
                 final String _childKey = snapshot.getKey();
                 final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
                 if (_childKey.equals(mAuth.getCurrentUser().getUid())) {
-                    if (snapshot.child("SAVED ITEMS").exists()) {
-                        id = _childValue.get("SAVED ITEMS").toString();
+                    if (snapshot.child(User.getSavedItems()).exists()) {
+                        id = _childValue.get(User.getSavedItems()).toString();
                         Log.i("id", "onChildAdded: " + id);
                         if (id.contains(productID)) {
                             save.setImageResource(R.drawable.ic_baseline_bookmark_24);
@@ -315,8 +315,8 @@ public class HomeViewInDetail extends AppCompatActivity implements ProductListDi
                         final String _childKey = snapshot.getKey();
                         final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
                         if (_childKey.equals(mAuth.getCurrentUser().getUid())) {
-                            if (snapshot.child("SAVED ITEMS").exists()) {
-                                id = _childValue.get("SAVED ITEMS").toString();
+                            if (snapshot.child(User.getSavedItems()).exists()) {
+                                id = _childValue.get(User.getSavedItems()).toString();
                                 Log.i("id", "onChildAdded: " + id);
                                 if (id.contains(productID)) {
                                     progressDialog.setTitle("Removing Product...");
@@ -324,7 +324,7 @@ public class HomeViewInDetail extends AppCompatActivity implements ProductListDi
                                     map.clear();
                                     map = new HashMap<>();
                                     userDataKey = userReference.push().getKey();
-                                    map.put("SAVED ITEMS", newID);
+                                    map.put(User.getSavedItems(), newID);
                                     userReference.child(_childKey).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
@@ -336,10 +336,10 @@ public class HomeViewInDetail extends AppCompatActivity implements ProductListDi
                                         }
                                     });
                                 } else {
-                                    oldID = _childValue.get("SAVED ITEMS").toString();
+                                    oldID = _childValue.get(User.getSavedItems()).toString();
                                     map = new HashMap<>();
                                     userDataKey = userReference.push().getKey();
-                                    map.put("SAVED ITEMS", oldID + productID + ", ");
+                                    map.put(User.getSavedItems(), oldID + productID + ", ");
                                     userReference.child(_childKey).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
@@ -354,7 +354,7 @@ public class HomeViewInDetail extends AppCompatActivity implements ProductListDi
                             } else {
                                 map = new HashMap<>();
                                 userDataKey = userReference.push().getKey();
-                                map.put("SAVED ITEMS", productID + ", ");
+                                map.put(User.getSavedItems(), productID + ", ");
                                 userReference.child(_childKey).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
