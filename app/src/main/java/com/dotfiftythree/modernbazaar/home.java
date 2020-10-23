@@ -1,6 +1,7 @@
 package com.dotfiftythree.modernbazaar;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,6 +50,19 @@ public class home extends Fragment {
     private TextView minmbsp;
     private TextView maxmbsp;
     private TextView currentmbsp;
+    private Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mContext = null;
+    }
 
     public home() {
         // Required empty public constructor
@@ -77,9 +92,11 @@ public class home extends Fragment {
             public void onClick(View v) {
                 if (mbspdes.getVisibility() == View.GONE) {
                     mbspdes.setVisibility(View.VISIBLE);
-                    Snackbar snackbar = Snackbar.make(base, getResources().getString(R.string.mbspclickagain), Snackbar.LENGTH_SHORT);
-                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.blue));
-                    snackbar.show();
+                    if (mContext != null) {
+                        Snackbar snackbar = Snackbar.make(base, getResources().getString(R.string.mbspclickagain), Snackbar.LENGTH_SHORT);
+                        snackbar.getView().setBackgroundColor(ContextCompat.getColor(mContext, R.color.red));
+                        snackbar.show();
+                    }
                 } else {
                     mbspdes.setVisibility(View.GONE);
                 }
@@ -99,18 +116,19 @@ public class home extends Fragment {
                 };
                 final String _childKey = snapshot.getKey();
                 final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
-                if (!(snapshot.child(Product.getBarter()).exists())) {
-                    value = Integer.parseInt((Objects.requireNonNull(_childValue.get(Product.getMbsp())).toString()).replace(" Rs", ""));
-                    mbspvalues.add(value);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        mbsppb.setMin(Collections.min(mbspvalues));
-                        min = Collections.min(mbspvalues);
-                    }
+                if (!((_childValue.get(Product.getUserid()).toString()).equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))) {
+                    if (!(snapshot.child(Product.getBarter()).exists())) {
+                        value = Integer.parseInt((Objects.requireNonNull(_childValue.get(Product.getMbsp())).toString()).replace(" Rs", ""));
+                        mbspvalues.add(value);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            mbsppb.setMin(Collections.min(mbspvalues));
+                            min = Collections.min(mbspvalues);
+                        }
 
-                    mbsppb.setMax(Collections.max(mbspvalues));
-                    max = Collections.max(mbspvalues);
-                    Log.i("minmax", "min" + Collections.min(mbspvalues) + "max" + Collections.max(mbspvalues));
-                }
+                        mbsppb.setMax(Collections.max(mbspvalues));
+                        max = Collections.max(mbspvalues);
+                        Log.i("minmax", "min" + Collections.min(mbspvalues) + "max" + Collections.max(mbspvalues));
+                    }
 //                Query maxvalue = productsfetch.orderByChild(Product.getMbsp());
 //                maxvalue.addValueEventListener(new ValueEventListener() {
 //                    @Override
@@ -151,6 +169,15 @@ public class home extends Fragment {
 //                        throw databaseError.toException(); // don't swallow errors
 //                    }
 //                });
+                } else {
+                    progressDialog.cancel();
+                    if (mContext != null) {
+                        Snackbar snackbar = Snackbar.make(base, getResources().getString(R.string.noproductfound), Snackbar.LENGTH_SHORT);
+                        snackbar.getView().setBackgroundColor(ContextCompat.getColor(mContext, R.color.red));
+                        snackbar.show();
+                    }
+
+                }
             }
 
             @Override
@@ -183,28 +210,37 @@ public class home extends Fragment {
                 };
                 final String _childKey = snapshot.getKey();
                 final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
-                if (!(snapshot.child(Product.getBarter()).exists())) {
-                    productName = _childValue.get(Product.getName()).toString();
-                    productDes = _childValue.get(Product.getDescription()).toString();
-                    if (_childValue.get(Product.getPurchaseYear()).equals("")) {
-                        periodOfUsage = _childValue.get(Product.getPurchaseMonth()).toString() + " Months";
-                    } else if (_childValue.get(Product.getPurchaseMonth()).equals("")) {
-                        periodOfUsage = _childValue.get(Product.getPurchaseYear()).toString() + " Years";
-                    } else {
-                        periodOfUsage = _childValue.get(Product.getPurchaseYear()).toString() + " Years " + _childValue.get(Product.getPurchaseMonth()).toString() + " Months";
-                    }
-                    productImage = _childValue.get(Product.getImage()).toString();
-                    Log.i("TAG", "onChildAdded: " + productImage);
-                    productID = _childValue.get(Product.getProductid()).toString();
+                if (!((_childValue.get(Product.getUserid()).toString()).equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))) {
+                    if (!(snapshot.child(Product.getBarter()).exists())) {
+                        productName = _childValue.get(Product.getName()).toString();
+                        productDes = _childValue.get(Product.getDescription()).toString();
+                        if (_childValue.get(Product.getPurchaseYear()).equals("")) {
+                            periodOfUsage = _childValue.get(Product.getPurchaseMonth()).toString() + " Months";
+                        } else if (_childValue.get(Product.getPurchaseMonth()).equals("")) {
+                            periodOfUsage = _childValue.get(Product.getPurchaseYear()).toString() + " Years";
+                        } else {
+                            periodOfUsage = _childValue.get(Product.getPurchaseYear()).toString() + " Years " + _childValue.get(Product.getPurchaseMonth()).toString() + " Months";
+                        }
+                        productImage = _childValue.get(Product.getImage()).toString();
+                        Log.i("TAG", "onChildAdded: " + productImage);
+                        productID = _childValue.get(Product.getProductid()).toString();
 
-                    fetchProductArrayLists.add(new FetchProductArrayList(productImage, productName, periodOfUsage, productDes, productID));
-                    fetchProductAdapter.notifyDataSetChanged();
+                        fetchProductArrayLists.add(new FetchProductArrayList(productImage, productName, periodOfUsage, productDes, productID));
+                        fetchProductAdapter.notifyDataSetChanged();
+                        progressDialog.cancel();
+                        minmbsp.setText(min + " Rs");
+                        maxmbsp.setText(max + " Rs");
+                    }
+                } else {
                     progressDialog.cancel();
-                    minmbsp.setText(min + " Rs");
-                    maxmbsp.setText(max + " Rs");
+                    if (mContext != null) {
+                        Snackbar snackbar = Snackbar.make(base, getResources().getString(R.string.noproductfound), Snackbar.LENGTH_SHORT);
+                        snackbar.getView().setBackgroundColor(ContextCompat.getColor(mContext, R.color.red));
+                        snackbar.show();
+                    }
+
                 }
             }
-
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
@@ -253,27 +289,36 @@ public class home extends Fragment {
                             final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
                             int value = Integer.parseInt((_childValue.get(Product.getMbsp()).toString()).replace(" Rs", ""));
                             Log.i("TAG2", "onChildAdded: " + value);
-                            if ((progress + 10) > value && (!(snapshot.child(Product.getBarter())).exists())) {
-                                recyclerView.setVisibility(View.VISIBLE);
-                                productName = _childValue.get(Product.getName()).toString();
-                                productDes = _childValue.get(Product.getDescription()).toString();
-                                if (_childValue.get(Product.getPurchaseYear()).equals("")) {
-                                    periodOfUsage = _childValue.get(Product.getPurchaseMonth()).toString() + " Months";
-                                } else if (_childValue.get(Product.getPurchaseMonth()).equals("")) {
-                                    periodOfUsage = _childValue.get(Product.getPurchaseYear()).toString() + " Years";
-                                } else {
-                                    periodOfUsage = _childValue.get(Product.getPurchaseYear()).toString() + " Years " + _childValue.get(Product.getPurchaseMonth()).toString() + " Months";
+                            if (!((_childValue.get(Product.getUserid()).toString()).equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))) {
+                                if ((progress + 10) > value && (!(snapshot.child(Product.getBarter())).exists())) {
+                                    recyclerView.setVisibility(View.VISIBLE);
+                                    productName = _childValue.get(Product.getName()).toString();
+                                    productDes = _childValue.get(Product.getDescription()).toString();
+                                    if (_childValue.get(Product.getPurchaseYear()).equals("")) {
+                                        periodOfUsage = _childValue.get(Product.getPurchaseMonth()).toString() + " Months";
+                                    } else if (_childValue.get(Product.getPurchaseMonth()).equals("")) {
+                                        periodOfUsage = _childValue.get(Product.getPurchaseYear()).toString() + " Years";
+                                    } else {
+                                        periodOfUsage = _childValue.get(Product.getPurchaseYear()).toString() + " Years " + _childValue.get(Product.getPurchaseMonth()).toString() + " Months";
+                                    }
+                                    productImage = _childValue.get(Product.getImage()).toString();
+                                    Log.i("TAG", "onChildAdded: " + productImage);
+                                    productID = _childValue.get(Product.getProductid()).toString();
+
+                                    fetchProductArrayLists.add(new FetchProductArrayList(productImage, productName, periodOfUsage, productDes, productID));
+                                    fetchProductAdapter.notifyDataSetChanged();
                                 }
-                                productImage = _childValue.get(Product.getImage()).toString();
-                                Log.i("TAG", "onChildAdded: " + productImage);
-                                productID = _childValue.get(Product.getProductid()).toString();
 
-                                fetchProductArrayLists.add(new FetchProductArrayList(productImage, productName, periodOfUsage, productDes, productID));
-                                fetchProductAdapter.notifyDataSetChanged();
+                            } else {
+                                progressDialog.cancel();
+                                if (mContext != null) {
+                                    Snackbar snackbar = Snackbar.make(base, getResources().getString(R.string.noproductfound), Snackbar.LENGTH_SHORT);
+                                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(mContext, R.color.red));
+                                    snackbar.show();
+                                }
+
                             }
-
                         }
-
                         @Override
                         public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 

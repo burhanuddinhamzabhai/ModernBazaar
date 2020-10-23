@@ -32,7 +32,7 @@ public class Profile extends Fragment {
     DatabaseReference userDetails = firebaseDatabase.getReference("userDB");
     ChildEventListener userDetailsListener;
     String userName, userGender;
-    private LinearLayout insert, logout, deactivate, base, newReq, recentBarterLin, savedItemLin;
+    private LinearLayout insert, logout, deactivate, base, newReq, recentBarterLin, savedItemLin, complain;
     private ImageView userImage;
     private TextView profileName;
 
@@ -60,7 +60,7 @@ public class Profile extends Fragment {
         newReq = v.findViewById(R.id.newrequest);
         recentBarterLin = v.findViewById(R.id.recentbarterlin);
         savedItemLin = v.findViewById(R.id.saveditemlin);
-
+        complain = v.findViewById(R.id.filecomplainlin);
 
         mAuth = FirebaseAuth.getInstance();
         insert.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +104,13 @@ public class Profile extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent transition = new Intent(getActivity(), SavedItems.class);
+                startActivity(transition);
+            }
+        });
+        complain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent transition = new Intent(getActivity(), FileAComplain.class);
                 startActivity(transition);
             }
         });

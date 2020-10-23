@@ -108,5 +108,15 @@
     <string name="barteridcopied">BarterID Copied</string>
     <string name="saveditemstxt">Saved Items</string>
     <string name="itemreoved">Item Removed</string>
+    <string name="noproductfound">No Products Found</string>
+    <string name="filecomplaintxt">File a Complain</string>
+    <string name="solveyourproblem">Let\'s solve your problem together.</string>
+    <string name="yourId">Your ID*</string>
+    <string name="sellerID">Seller ID*</string>
+    <string name="productID">Product ID</string>
+    <string name="barterID">Barter ID</string>
+    <string name="complaindes">Complain Description*</string>
+    <string name="registercomplain">Register Complain</string>
+    <string name="registerdsuccess">Your Complain Has Been Recorded!</string>
 
 </resources>
