@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".products">
+    tools:context=".OwnProductsFragment.products">
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/ownProductsRecyclerView"
-        android:layout_marginBottom="76dp" />
+        android:layout_marginBottom="86dp" />
 
 </FrameLayout>

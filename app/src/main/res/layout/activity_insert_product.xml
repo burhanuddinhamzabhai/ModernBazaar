@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    tools:context=".InsertProduct">
+    tools:context=".ProfileFragment.InsertProduct">
 
     <LinearLayout
         android:id="@+id/backforinsert"

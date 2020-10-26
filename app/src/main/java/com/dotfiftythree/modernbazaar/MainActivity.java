@@ -16,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.dotfiftythree.modernbazaar.HomeFragment.HomePage;
+import com.dotfiftythree.modernbazaar.Registration.Registration;
+import com.dotfiftythree.modernbazaar.Visitor.Visitor;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
