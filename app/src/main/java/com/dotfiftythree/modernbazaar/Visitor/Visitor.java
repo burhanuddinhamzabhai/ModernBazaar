@@ -282,7 +282,7 @@ public class Visitor extends AppCompatActivity {
 
                                 fetchProductArrayLists.add(new FetchProductArrayList(productImage, productName, periodOfUsage, productDes, productID));
                                 fetchProductAdapter.notifyDataSetChanged();
-                                
+
 
                             } else {
                                 progressDialog.cancel();
