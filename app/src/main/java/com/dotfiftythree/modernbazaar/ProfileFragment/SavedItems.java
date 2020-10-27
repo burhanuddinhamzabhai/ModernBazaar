@@ -1,6 +1,7 @@
 package com.dotfiftythree.modernbazaar.ProfileFragment;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -133,19 +134,20 @@ public class SavedItems extends AppCompatActivity {
         productDB = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Log.i("saved", savedProducts);
                 String productName = "", productImage = "", productID = "";
                 GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {
                 };
                 final String _childKey = snapshot.getKey();
                 final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
-                if (savedProducts.contains(_childValue.get(Product.getProductid()).toString())) {
-                    productID = _childValue.get(Product.getProductid()).toString();
-                    productName = _childValue.get(Product.getName()).toString();
-                    productImage = _childValue.get(Product.getImage()).toString();
-                    Log.i("pname", productName);
-                    savedItemsLists.add(new SavedItemsList(productName, productImage, productID));
-                    savedItemsAdapter.notifyDataSetChanged();
+                if (!TextUtils.isEmpty(savedProducts)) {
+                    if (savedProducts.contains(_childValue.get(Product.getProductid()).toString())) {
+                        productID = _childValue.get(Product.getProductid()).toString();
+                        productName = _childValue.get(Product.getName()).toString();
+                        productImage = _childValue.get(Product.getImage()).toString();
+                        Log.i("pname", productName);
+                        savedItemsLists.add(new SavedItemsList(productName, productImage, productID));
+                        savedItemsAdapter.notifyDataSetChanged();
+                    }
                 }
             }
 

@@ -47,7 +47,7 @@ public class Visitor extends AppCompatActivity {
     ArrayList<Integer> mbspvalues = new ArrayList<>();
     private TextView mbspinfo, signup, minmbsp, maxmbsp, currentmbsp;
     int min, max;
-
+    int prog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -248,9 +248,10 @@ public class Visitor extends AppCompatActivity {
 
         mbsppb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, final int progress, boolean fromUser) {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
                     fetchProductArrayLists.clear();
+                    prog = progress;
                     currentmbsp.setText(progress + " Rs");
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         mbsppb.setMin(Integer.parseInt((minmbsp.getText().toString()).replace(" Rs", "")));
@@ -265,7 +266,7 @@ public class Visitor extends AppCompatActivity {
                             final HashMap<String, Object> _childValue = snapshot.getValue(_ind);
                             int value = Integer.parseInt((_childValue.get(Product.getMbsp()).toString()).replace(" Rs", ""));
                             Log.i("TAG2", "onChildAdded: " + value);
-                            if ((progress + 10) > value && (!(snapshot.child(Product.getBarter())).exists())) {
+                            if ((prog + 10) > value && (!(snapshot.child(Product.getBarter())).exists())) {
                                 recyclerView.setVisibility(View.VISIBLE);
                                 productName = _childValue.get(Product.getName()).toString();
                                 productDes = _childValue.get(Product.getDescription()).toString();
@@ -286,11 +287,11 @@ public class Visitor extends AppCompatActivity {
 
                             } else {
                                 progressDialog.cancel();
+                            }
+                            if (fetchProductArrayLists.isEmpty()) {
                                 Snackbar snackbar = Snackbar.make(base, getResources().getString(R.string.noproductfound), Snackbar.LENGTH_SHORT);
                                 snackbar.getView().setBackgroundColor(ContextCompat.getColor(Visitor.this, R.color.red));
                                 snackbar.show();
-
-
                             }
                         }
                         @Override
@@ -313,7 +314,9 @@ public class Visitor extends AppCompatActivity {
 
                         }
                     };
+
                     productsfetch.addChildEventListener(changefetch);
+
                 }
             }
 

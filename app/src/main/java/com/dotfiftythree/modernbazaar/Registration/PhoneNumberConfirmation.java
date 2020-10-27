@@ -19,13 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.dotfiftythree.modernbazaar.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
@@ -94,7 +90,7 @@ public class PhoneNumberConfirmation extends AppCompatActivity {
 
             @Override
             public void onVerificationCompleted(PhoneAuthCredential credential) {
-                signInWithPhoneAuthCredential(credential);
+//                signInWithPhoneAuthCredential(credential);
                 progressDialog.cancel();
             }
 
@@ -113,40 +109,41 @@ public class PhoneNumberConfirmation extends AppCompatActivity {
                                         progressDialog.cancel();
                                         Intent transition = new Intent(PhoneNumberConfirmation.this, OTPVerification.class);
                                         transition.putExtra("AuthCredentials",verificationId);
-                                        transition.putExtra("Number",completeNumber);
+                                        transition.putExtra("Number", completeNumber);
                                         startActivity(transition);
                                         finish();
                                     }
-                                },10000);
+                                }, 10000);
 
 
             }
         };
     }
-    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(PhoneNumberConfirmation.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            progressDialog.cancel();
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("PhoneVerification", "signInWithCredential:success");
-                            Intent transition = new Intent(PhoneNumberConfirmation.this, TermsandCondition.class);
-                            startActivity(transition);
-                            finish();
 
-                        } else {
-                            progressDialog.cancel();
-                            // Sign in failed, display a message and update the UI
-                            Log.w("PhoneVerification", "signInWithCredential:failure", task.getException());
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                // The verification code entered was invalid
-                            }
-                        }
-                    }
-                });
-    }
+    //    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+//        mAuth.signInWithCredential(credential)
+//                .addOnCompleteListener(PhoneNumberConfirmation.this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            progressDialog.cancel();
+//                            // Sign in success, update UI with the signed-in user's information
+//                            Log.d("PhoneVerification", "signInWithCredential:success");
+//                            Intent transition = new Intent(PhoneNumberConfirmation.this, TermsandCondition.class);
+//                            startActivity(transition);
+//                            finish();
+//
+//                        } else {
+//                            progressDialog.cancel();
+//                            // Sign in failed, display a message and update the UI
+//                            Log.w("PhoneVerification", "signInWithCredential:failure", task.getException());
+//                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+//                                // The verification code entered was invalid
+//                            }
+//                        }
+//                    }
+//                });
+//    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
